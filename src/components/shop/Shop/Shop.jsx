@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import Product from "../Products/Product/Product"
 
 import Category from "../Categories/Category/Category"
@@ -9,12 +11,25 @@ import PropTypes from 'prop-types';
 
 const Shop = ({ categories, products }) => {
 
+    const [ filterType, setFilterType ] = useState( "SINGLE" )
+
+
+    const [ currentCategories, setCurrentCategories ] = useState([])
+
     let renderProducts
     let renderCategories
 
+    const chooseCategory = ( id ) => {
+        console.log("Chose", id )
+    }
+
     if( Array.isArray( categories ) && categories.length > 0 ) {
         renderCategories = categories.map( (category, i) => (
-            <Category {...category} key={ `category-${i}` }/>
+            <Category
+                {...category}
+                onClick={ ()=>chooseCategory( category.id ) }
+                key={ `category-${i}` }
+            />
         ))
     } else {
         renderCategories = (
@@ -36,14 +51,35 @@ const Shop = ({ categories, products }) => {
         )
     }
 
+    const changeFilter = () => {
+        if( filterType == "SINGLE" ) {
+            setFilterType("MULTIPLE")
+        } else {
+            setFilterType("SINGLE")
+        }
+    }
+
     return (
         <div className={ `Shop ${ styles.Shop }` }>                        
-            <div className="Categories">
+            <aside className={ styles.Categories }>
+                {/* header */}
+                <header>
+                    {/* button */}
+                    <button onClick={ changeFilter }>
+                        {
+                            filterType == "SINGLE"
+                            ? "Elegir una"
+                            : "Elegir varias"
+                        }
+                    </button>
+                </header>
+
+
                 { renderCategories }
-            </div>
-            <div className="Products">
+            </aside>
+            <main className={ styles.Products }>
                 { renderProducts }
-            </div>
+            </main>
         </div>
     )
 

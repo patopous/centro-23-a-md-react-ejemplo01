@@ -1,10 +1,27 @@
 .Shop {
 
-    /* bd */
-    border: 1px solid #000;
+    /* w100p */
+    width: 100%;
 
-    /* w18rem */
-    width: 18rem;
+}
+
+@media screen and ( min-width: 768px ) {
+    .Shop {
+        /* dg */
+        display: grid;
+        /* gtc */
+        grid-template-columns: 10rem 1fr;
+    }
+}
+
+.Products {
+
+    /* df */
+    display: flex;
+    /* fwr */
+    flex-wrap: wrap;
+    /* jcsev */
+    justify-content: space-evenly;
 
 }
 

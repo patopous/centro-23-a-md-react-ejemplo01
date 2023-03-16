@@ -8,7 +8,7 @@ const Category = ({
 
     return (
         <div className={ `Category ${ styles.Category }` }>            
-            <div class={ styles.name }>
+            <div className={ styles.name }>
                 { name }
             </div>
         </div>
