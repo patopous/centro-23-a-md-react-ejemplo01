@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 
 
 const SomeText = ({ text }) => {
+        
     return (
         <div className={ `SomeText ${styles.SomeText}` }>
             { text }
         </div>
     )
+
 }
 
 SomeText.defaultProps = {

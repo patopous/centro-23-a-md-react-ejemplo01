@@ -1,0 +1,15 @@
+.Cards {
+
+    /* w100p */
+    width: 100%;
+
+    /* df */
+    display: flex;
+
+    /* fwr */
+    flex-wrap: wrap;
+
+    /* gap */
+    gap: 1rem;
+    
+}

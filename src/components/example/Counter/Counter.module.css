@@ -1,0 +1,18 @@
+.Counter {
+    width: 20rem;
+    text-align: center;
+    outline: 1px solid #ccc;
+    padding: 2rem;
+}
+
+.Counter .number {
+
+    font-size: 3rem;
+
+}
+
+.Counter footer {
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+}

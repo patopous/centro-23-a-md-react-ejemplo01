@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Product 1",
+        "image": "https://www.mountaingoatsoftware.com/uploads/blog/2016-09-06-what-is-a-product.png",
+        "categories": [ 1, 2 ]
+    },
+    {
+        "id": 2,
+        "name": "Product 2",
+        "image": "https://assets.thehansindia.com/h-upload/2022/07/18/1303611-pro.webp",
+        "categories": [ 2, 3 ]
+    }
+]

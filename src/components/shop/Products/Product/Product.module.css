@@ -1,0 +1,20 @@
+.Product {
+
+    /* bd */
+    border: 1px solid #000;
+
+    /* w18rem */
+    width: 18rem;
+
+}
+
+.image {
+    
+    /* mxw */
+    max-width: 100%;
+}
+
+
+.name {
+    padding: 0.5rem;
+}
