@@ -1,12 +1,22 @@
 import styles from "./Counter.module.css"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const Counter = () => {
 
     // let number = 50
 
     const [ number, setNumber ] = useState( 50 )
+   
+    useEffect(()=>{
+        console.log("inicializar");
+    }, [])
+
+    useEffect( () => {
+        console.log( "new number is:", number );
+    }, [ number ])
+    
+    
 
 
     const decrement = () => {

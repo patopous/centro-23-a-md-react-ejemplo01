@@ -11,3 +11,10 @@
 .name {
     padding: 0.5rem;
 }
+
+.chosen {
+    /* bgc */
+    background-color: #000;
+    /* c */
+    color: #fff;
+}

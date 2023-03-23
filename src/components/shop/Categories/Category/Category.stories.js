@@ -16,3 +16,9 @@ export const Default = Template.bind({});
 Default.args = {
     name: "Lorem ipsum"
 };
+
+export const Chosen = Template.bind({});
+Chosen.args = {
+    name: "Lorem ipsum",
+    chosen: true
+};

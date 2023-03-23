@@ -1,13 +1,12 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import Product from "../Products/Product/Product"
-
 import Category from "../Categories/Category/Category"
-
 
 import styles from "./Shop.module.css"
 
 import PropTypes from 'prop-types';
+
 
 const Shop = ({ categories, products }) => {
 
@@ -15,19 +14,65 @@ const Shop = ({ categories, products }) => {
 
 
     const [ currentCategories, setCurrentCategories ] = useState([])
+    const [ lastMultipleChoice, setLastMultipleChoice ] = useState([])
+
+    const [ filteredProducts, setFilteredProducts ] = useState([])
 
     let renderProducts
     let renderCategories
 
+
+    // Al inicializar
+    useEffect(() => {
+        setFilteredProducts( products )
+    }, [])
+
+    // reaccionar al cambiar las categorías seleccionadas
+    useEffect(()=>{
+        if( currentCategories.length > 0 ) {
+            // elegir productos cuyas categorías están en la selección actual
+            const productsInCurrentCategories = products.filter( product => {
+                // buscamos si alguna de las categorías del
+                // producto está en la lista de seleccionadas
+                return !! product.categories.find(
+                    productCategory => currentCategories.includes( productCategory )
+                )
+            })
+            setFilteredProducts( productsInCurrentCategories )
+        } else {
+            // si no está seleccionada ninguna categoría:
+            // mostrar todos los productos
+            setFilteredProducts( products )
+        }
+    }, [ currentCategories ])
+
+
     const chooseCategory = ( id ) => {
         console.log("Chose", id )
+        if( filterType == "SINGLE" ) {
+            setCurrentCategories( [ id ] )
+        } else {
+            let copy = [ ...currentCategories ]
+            if( copy.includes( id ) ) {
+                // retirar categoría clicada del arreglo:
+                // const index = copy.indexOf( id )
+                // copy.splice( index, 1 )
+                copy = copy.filter( x => x != id )
+            } else {
+                // agregar categoría clicada al arreglo:
+                copy.push( id )
+            }
+            setCurrentCategories( copy )
+            setLastMultipleChoice( copy )
+        }
     }
 
     if( Array.isArray( categories ) && categories.length > 0 ) {
         renderCategories = categories.map( (category, i) => (
             <Category
                 {...category}
-                onClick={ ()=>chooseCategory( category.id ) }
+                chosen={ currentCategories.includes( category.id ) }
+                choose={ ()=>chooseCategory( category.id ) }
                 key={ `category-${i}` }
             />
         ))
@@ -39,8 +84,8 @@ const Shop = ({ categories, products }) => {
         )
     }
     
-    if( Array.isArray( products ) && products.length > 0 ) {
-        renderProducts = products.map( (product, i) => (
+    if( Array.isArray( filteredProducts ) && filteredProducts.length > 0 ) {
+        renderProducts = filteredProducts.map( (product, i) => (
             <Product {...product} key={ `product-${i}` }/>
         ))   
     } else {
@@ -54,6 +99,9 @@ const Shop = ({ categories, products }) => {
     const changeFilter = () => {
         if( filterType == "SINGLE" ) {
             setFilterType("MULTIPLE")
+
+            setCurrentCategories( lastMultipleChoice )
+            
         } else {
             setFilterType("SINGLE")
         }
