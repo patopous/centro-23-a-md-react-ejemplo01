@@ -18,6 +18,8 @@ const Shop = ({ categories, products }) => {
 
     const [ filteredProducts, setFilteredProducts ] = useState([])
 
+    const [ currentProducts, setCurrentProducts ] = useState([])
+
     let renderProducts
     let renderCategories
 
@@ -70,6 +72,17 @@ const Shop = ({ categories, products }) => {
 
     const chooseProduct = id => {
         console.log("Chose product:", id )
+
+        let copy = [ ...currentProducts ]
+        if( copy.includes( id ) ) {
+            // retirar producto clicado del arreglo:
+            copy = copy.filter( x => x != id )
+        } else {
+            // agregar producto clicado al arreglo:
+            copy.push( id )
+        }
+        setCurrentProducts( copy )
+        
     }
 
 
