@@ -10,6 +10,8 @@
 
 .image {
     
+    /* w100p */
+    width: 100%;
     /* mxw */
     max-width: 100%;
 
@@ -20,4 +22,9 @@
 
 .name {
     padding: 0.5rem;
+}
+
+.chosen {
+    /* bd */
+    border: 2px solid blue;
 }

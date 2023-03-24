@@ -67,6 +67,11 @@ const Shop = ({ categories, products }) => {
         }
     }
 
+
+    const chooseProduct = id => {
+        console.log("Chose product:", id )
+    }
+
     if( Array.isArray( categories ) && categories.length > 0 ) {
         renderCategories = categories.map( (category, i) => (
             <Category

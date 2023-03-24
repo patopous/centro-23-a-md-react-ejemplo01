@@ -17,3 +17,10 @@ Default.args = {
     image: "http://placehold.it/300",
     name: "Lorem ipsum"
 };
+
+export const Chosen = Template.bind({});
+Chosen.args = {
+    image: "http://placehold.it/300",
+    name: "Lorem ipsum",
+    chosen: true
+};
