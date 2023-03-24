@@ -72,6 +72,7 @@ const Shop = ({ categories, products }) => {
         console.log("Chose product:", id )
     }
 
+
     if( Array.isArray( categories ) && categories.length > 0 ) {
         renderCategories = categories.map( (category, i) => (
             <Category
@@ -91,7 +92,12 @@ const Shop = ({ categories, products }) => {
     
     if( Array.isArray( filteredProducts ) && filteredProducts.length > 0 ) {
         renderProducts = filteredProducts.map( (product, i) => (
-            <Product {...product} key={ `product-${i}` }/>
+            <Product
+                {...product}
+                key={ `product-${i}` }
+                choose={ ()=>chooseProduct( product.id ) }
+                chosen={ currentProducts.includes( product.id ) }
+            />
         ))   
     } else {
         renderProducts = (
