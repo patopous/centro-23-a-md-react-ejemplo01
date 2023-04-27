@@ -3,4 +3,28 @@
     width: 20rem;
     height: 20rem;
     padding: 1rem;
+    position: relative;
+}
+
+.Footer {
+    
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.screen1 {
+    width: 100%;
+    height: 100%;
+    background-color: #f00;
+}
+.screen2 {
+    width: 100%;
+    height: 100%;
+    background-color: #0f0;
+}
+.screen3 {
+    width: 100%;
+    height: 100%;
+    background-color: #00f;
 }
