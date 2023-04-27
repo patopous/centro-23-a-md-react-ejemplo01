@@ -3,6 +3,12 @@ import { useState, useEffect } from "react"
 import Product from "../Products/Product/Product"
 import Category from "../Categories/Category/Category"
 
+import Cart from "../Cart/Cart"
+
+import ShopView from "./ShopView/ShopView"
+
+import Confirmation from "../Confirmation/Confirmation"
+
 import styles from "./Shop.module.css"
 
 import PropTypes from 'prop-types';
@@ -19,6 +25,9 @@ const Shop = ({ categories, products }) => {
     const [ filteredProducts, setFilteredProducts ] = useState([])
 
     const [ currentProducts, setCurrentProducts ] = useState([])
+    
+    
+    const [ screen, setScreen ] = useState("SHOP")
 
     let renderProducts
     let renderCategories
@@ -131,30 +140,73 @@ const Shop = ({ categories, products }) => {
         }
     }
 
-    return (
-        <div className={ `Shop ${ styles.Shop }` }>                        
-            <aside className={ styles.Categories }>
-                {/* header */}
-                <header>
-                    {/* button */}
-                    <button onClick={ changeFilter }>
-                        {
-                            filterType == "SINGLE"
-                            ? "Elegir una"
-                            : "Elegir varias"
-                        }
-                    </button>
-                </header>
+
+    const getProductById = id => products.find( p => p.id == id )
+
+    const getCartQuantity = () => {
+        return currentProducts.length
+    }
+
+    const getCartCost = () => {
+        return currentProducts.reduce(
+            ( acc, p ) => acc += getProductById(p).cost,
+            0
+        )
+    }
 
 
-                { renderCategories }
-            </aside>
-            <main className={ styles.Products }>
-                { renderProducts }
-            </main>
-        </div>
-    )
+    const openCheckout = () => {
+        setScreen("CHECKOUT")
+    }
+    
+    const openConfirmation = () => {
+        setScreen("CONFIRMATION")
+    }
 
+
+    switch( screen ) {
+
+        case "SHOP":
+
+            return (
+                <ShopView
+                    quantity={ getCartQuantity() }
+                    cost={ getCartCost() }
+                    openCheckout={ openCheckout }
+                    changeFilter={ changeFilter }
+                    filterType={ filterType }
+                    categories={ renderCategories }
+                    products={ renderProducts }
+                />
+            )
+            
+            // break
+
+        case "CHECKOUT":
+            
+            const currentProductsListItems = currentProducts.map( id => products.find( p => p.id == id ) )
+            
+            return (
+                <Confirmation
+                    products={ currentProductsListItems }
+                    action={ openConfirmation }
+                    total={ getCartCost() }
+                />
+            )
+    
+            // break
+        case "CONFIRMATION":
+            return (
+                <h1>
+                    Orden recibida
+                </h1>
+            )
+            // break
+
+
+    }
+
+            
 }
 
 Shop.propTypes = {
