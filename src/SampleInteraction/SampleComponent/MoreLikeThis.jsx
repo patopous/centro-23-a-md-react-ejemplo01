@@ -1,7 +1,7 @@
 import { useState } from "react";
-import style from "./SampleComponent.module.css"
+import style from "./MoreLikeThis.module.css"
 
-const SampleComponent = () => {
+const MoreLikeThis = () => {
 
     const [ moreLikeThis, setMoreLikeThis ] = useState( 0 )
 
@@ -20,19 +20,19 @@ const SampleComponent = () => {
 
     switch( moreLikeThis ) {
         case 0:
-            moreLikeThis = <button className={ style.MoreLikeThis1 }
+            renderMoreLikeThis = <button className={ style.MoreLikeThis1 }
             onClick={ nextMoreLikeThis }>
                 ____
             </button>
             break
         case 1:
-            moreLikeThis = <button className={ style.MoreLikeThis2 }
+            renderMoreLikeThis = <button className={ style.MoreLikeThis2 }
             onClick={ nextMoreLikeThis }>
                 More
             </button>
             break
         case 2:
-            moreLikeThis = <button className={ style.MoreLikeThis3 }
+            renderMoreLikeThis = <button className={ style.MoreLikeThis3 }
             onClick={ nextMoreLikeThis }>
                 Less
             </button>
@@ -54,5 +54,5 @@ const SampleComponent = () => {
 
 }
 
-export default SampleComponent
+export default MoreLikeThis
 
